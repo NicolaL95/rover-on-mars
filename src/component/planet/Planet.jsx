@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Cell from '../cell/Cell'
 import { useRoverConfiguration } from '../../hooks/useRoverConfiguration'
 import { generateObstale } from '../../utils/generateObstacle'
+import { subscribe } from '../../utils/event'
 
 export default function Planet({ nOfCells }) {
 
     const [grid, setGrid] = useState([])
-    const obstacles = generateObstale(nOfCells)
+    let obstacles =useMemo(()=>{return generateObstale(nOfCells)},[]) 
     const {useRoverApi , roverInfo} = useRoverConfiguration(nOfCells,obstacles);
+    const [roverData,setRoverData] = useRoverApi([]);
 
     useEffect(() => {
         const tmpState = []
         
+        subscribe("sendCommands",(event)=>{
+            setRoverData(event.detail)
+        })
+        
 
-        console.log(roverInfo,obstacles)
-
-        for (let indexRow = 0; indexRow < 10; indexRow++) {
+        for (let indexCol = 0; indexCol < 10; indexCol++) {
             tmpState.push([])
 
-            for (let indexCol = 0; indexCol < 10; indexCol++) {
-                tmpState[indexRow].push(<Cell hasRover={indexRow === roverInfo.x && indexCol === roverInfo.y} tmpContent={`${indexRow} ${indexCol}`} />)
+            for (let indexRow = 0; indexRow < 10; indexRow++) {
+                tmpState[indexCol].push(<Cell haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === roverInfo.x && indexCol === roverInfo.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
 
             }
         }
@@ -27,6 +31,25 @@ export default function Planet({ nOfCells }) {
 
 
     }, [])
+
+    useEffect(() => {
+
+        const tmpState = []
+
+        for (let indexCol = 0; indexCol < 10; indexCol++) {
+            tmpState.push([])
+
+            for (let indexRow = 0; indexRow < 10; indexRow++) {
+                tmpState[indexCol].push(<Cell haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === roverData.x && indexCol === roverData.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
+
+            }
+        }
+        setGrid(tmpState)
+
+
+    console.log(roverData)
+    }, [roverData])
+    
 
     
 
