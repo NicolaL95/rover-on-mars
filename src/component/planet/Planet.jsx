@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import Cell from '../cell/Cell'
+import { useRoverConfiguration } from '../../hooks/useRoverConfiguration'
+import { generateObstale } from '../../utils/generateObstacle'
 
 export default function Planet({ nOfCells }) {
 
     const [grid, setGrid] = useState([])
+    const obstacles = generateObstale(nOfCells)
+    const {useRoverApi , roverInfo} = useRoverConfiguration(nOfCells,obstacles);
 
     useEffect(() => {
         const tmpState = []
+        
+
+        console.log(roverInfo,obstacles)
 
         for (let indexRow = 0; indexRow < 10; indexRow++) {
             tmpState.push([])
 
             for (let indexCol = 0; indexCol < 10; indexCol++) {
-                tmpState[indexRow].push(<Cell tmpContent={`${indexRow} ${indexCol}`} />)
+                tmpState[indexRow].push(<Cell hasRover={indexRow === roverInfo.x && indexCol === roverInfo.y} tmpContent={`${indexRow} ${indexCol}`} />)
 
             }
         }
-        console.log(tmpState)
-
         setGrid(tmpState)
 
 
     }, [])
+
+    
 
 
     const generateGrid = () =>{
