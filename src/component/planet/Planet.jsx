@@ -23,7 +23,7 @@ export default function Planet({ nOfCells }) {
             tmpState.push([])
 
             for (let indexRow = 0; indexRow < 10; indexRow++) {
-                tmpState[indexCol].push(<Cell haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === roverInfo.x && indexCol === roverInfo.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
+                tmpState[indexCol].push(<Cell roverPosition={roverInfo.z} coordinates={{x:indexRow,y:indexCol}} haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === roverInfo.x && indexCol === roverInfo.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
 
             }
         }
@@ -40,7 +40,7 @@ export default function Planet({ nOfCells }) {
             tmpState.push([])
 
             for (let indexRow = 0; indexRow < 10; indexRow++) {
-                tmpState[indexCol].push(<Cell haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === roverData.x && indexCol === roverData.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
+                tmpState[indexCol].push(<Cell roverPosition={roverData.z} coordinates={{x:indexRow,y:indexCol}} haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === roverData.x && indexCol === roverData.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
 
             }
         }

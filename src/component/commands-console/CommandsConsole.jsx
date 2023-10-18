@@ -35,7 +35,7 @@ export default function CommandsConsole() {
                 {commandList.map((command, index) => {
                     return(
                        
-                        <div style={{paddingRight: '2px'}}>{command}</div>
+                        <div style={{paddingRight: '2px',color:"white"}}>{command}</div>
                     )
                 })}
             </div>

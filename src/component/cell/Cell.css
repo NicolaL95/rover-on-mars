@@ -1,0 +1,31 @@
+.cell-terrain{
+    background-image: url("../../assets/images/mars-square.png");
+}
+
+.cell-angle-top-left{
+    border-radius: 20px 0 0 0;
+}
+
+.cell-angle-top-right{
+    border-radius: 0 20px 0 0;
+}
+
+.cell-angle-bottom-left{
+    border-radius: 0 0 0 20px;
+}
+
+.cell-angle-bottom-right{
+    border-radius: 0 0 20px 0;
+}
+
+.rover-orientation-east{
+    transform: rotate(90deg);
+}
+
+.rover-orientation-sud{
+    transform: rotate(180deg);
+}
+
+.rover-orientation-weast{
+    transform: rotate(270deg);
+}

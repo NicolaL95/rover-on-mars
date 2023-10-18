@@ -52,9 +52,9 @@ export const useRoverConfiguration = (nOfCells, obstacles) => {
 
         const updateRoverOrientation = (command) => {
             orientation = command === "right" ?
-                orientation + 1 === orientationList.length ? 0 : orientation - 1
+                orientation === orientationList.length - 1 ? 0 : orientation + 1
                 :
-                orientation === 0 ? orientationList.length - 1 : orientation + 1
+                orientation === 0 ? orientationList.length - 1 : orientation - 1
         }
 
         const getRoverInitialPosition = (() => {
