@@ -5,7 +5,7 @@ function RoverHub() {
   return (
     <div>
         <Planet nOfCells={10}/>
-        <CommandsConsole/>
+        <CommandsConsole />
     </div>
   )
 }

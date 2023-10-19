@@ -37,7 +37,9 @@ export default function Planet({ nOfCells }) {
     }, [])
 
     useEffect(() => {
+
         const tmpState = []
+
         for (let indexCol = 0; indexCol < nOfCells; indexCol++) {
             tmpState.push([])
 

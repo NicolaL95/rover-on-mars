@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { publish } from "../utils/event";
-
 export const useRoverConfiguration = (nOfCells, obstacles) => {
 
     const configureRoverInfoAndCommands = useMemo(() => {
@@ -59,9 +58,11 @@ export const useRoverConfiguration = (nOfCells, obstacles) => {
 
         const useRoverApi = () => {
             const [data, setData] = useState({x,y,z:orientationList[orientation]});
-            publish("currentOrientation",orientationList[orientation])
             
-
+            setTimeout(()=>{
+                publish("currentOrientation",orientationList[orientation])
+            },100)
+             
             const shiftRover = (commandList) => {
                 setTimeout(()=>{
                 let pastTrack = [{x,y,z: orientationList[orientation]}];

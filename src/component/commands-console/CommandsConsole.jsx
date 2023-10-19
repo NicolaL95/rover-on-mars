@@ -3,15 +3,16 @@ import Button from '../button/Button'
 import { publish } from '../../utils/event';
 import "./CommandsConsole.css"
 import { subscribe } from '../../utils/event';
+import { useRoverConfiguration } from '../../hooks/useRoverConfiguration';
 
 export default function CommandsConsole() {
 
     const [commandList, setCommandList] = useState([])
     const [orientation, setOrientation] = useState()
     useEffect(() => {
+        
         subscribe("currentOrientation",(event)=>{
             setOrientation(event.detail) 
-             
         })
     
     }, [])

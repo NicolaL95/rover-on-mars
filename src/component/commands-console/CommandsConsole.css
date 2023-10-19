@@ -1,5 +1,5 @@
 .button-movment{
-  width: 95px;
+  width: 110px;
   font-size: 1.1rem;
   color: white;
   border-radius: 15px;
@@ -18,7 +18,7 @@
 
 .button-query-handle{
     width: 150px;
-    font-size: 1rem;
+    font-size: 1.15rem;
     background-color: rgb(208, 208, 177);
     border-radius: 15px;
     border: 2px solid gray;
