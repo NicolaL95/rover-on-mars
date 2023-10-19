@@ -65,6 +65,7 @@ export const useRoverConfiguration = (nOfCells, obstacles) => {
 
 
             const shiftRover = (commandList) => {
+                //timeout to simulate API delay
                 setTimeout(() => {
                     let pastTrack = [{ x, y, z: orientationList[orientation] }];
                     for (const iterator of commandList) {
@@ -86,7 +87,7 @@ export const useRoverConfiguration = (nOfCells, obstacles) => {
                             default:
                                 break;
                         }
-                        //if the rover find an obstacle exit from the loop and thow an error  
+                        //if the rover encounters an obstacle exit from the loop and thow an error  
                         if (obstacles.some(element => element?.x === tmpX && element?.y === tmpY)) {
                             console.error(`obstacle reached at X: ${tmpX} Y:${tmpY}`);
                             break
