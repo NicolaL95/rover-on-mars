@@ -15,40 +15,35 @@ export default function Planet({ nOfCells }) {
        return rover.pastTrack?.find(element => element?.x === x && element?.y === y && element)?.z
     }
 
-    useEffect(() => {
+    const getGridConfiguration = (rover) =>{
         const tmpState = []
+        for (let indexCol = 0; indexCol < nOfCells; indexCol++) {
+            tmpState.push([])
+
+            for (let indexRow = 0; indexRow < nOfCells; indexRow++) {
+                tmpState[indexCol].push(<Cell key={`${indexRow}-${indexCol}`} pastTrack={getElementPastTrack(rover,indexRow,indexCol)} roverPosition={rover.z} coordinates={{x:indexRow,y:indexCol}} haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === rover.x && indexCol === rover.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
+
+            }
+        }
+        setGrid(tmpState)
+
+    }
+
+    useEffect(() => {
+        
         
         subscribe("sendCommands",(event)=>{
             setRoverData(event.detail)
         })
         
 
-        for (let indexCol = 0; indexCol < nOfCells; indexCol++) {
-            tmpState.push([])
-
-            for (let indexRow = 0; indexRow < nOfCells; indexRow++) {
-                tmpState[indexCol].push(<Cell pastTrack={getElementPastTrack(roverInfo,indexRow,indexCol)} roverPosition={roverInfo.z} coordinates={{x:indexRow,y:indexCol}} haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === roverInfo.x && indexCol === roverInfo.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
-
-            }
-        }
-        setGrid(tmpState)
-
+        getGridConfiguration(roverInfo)
 
     }, [])
 
     useEffect(() => {
 
-        const tmpState = []
-
-        for (let indexCol = 0; indexCol < nOfCells; indexCol++) {
-            tmpState.push([])
-
-            for (let indexRow = 0; indexRow < nOfCells; indexRow++) {
-                tmpState[indexCol].push(<Cell pastTrack={getElementPastTrack(roverData,indexRow,indexCol)} roverPosition={roverData.z} coordinates={{x:indexRow,y:indexCol}} haveObstacle={obstacles.some(element => element?.x === indexRow && element?.y === indexCol)} hasRover={indexRow === roverData.x && indexCol === roverData.y} tmpContent={`y = ${indexCol} x = ${indexRow}`} />)
-
-            }
-        }
-        setGrid(tmpState)
+        getGridConfiguration(roverData)
     }, [roverData])
     
 
