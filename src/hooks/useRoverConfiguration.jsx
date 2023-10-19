@@ -6,53 +6,36 @@ export const useRoverConfiguration = (nOfCells, obstacles) => {
     const configureRoverInfoAndCommands = useMemo(() => {
 
         let orientation = Math.floor(Math.random() * 4)
-        const orientationList = ["n", "e", "s", "o"]
+        const orientationList = ["N", "E", "S", "O"]
         let x = 0
         let y = 0
         let tmpY = 0
         let tmpX = 0
 
-        const handleSpherePlanet = (value, ACTION) => {
-            switch (orientationList[orientation]) {
-                case "n":
-                    if (ACTION === "INCREMENT") value = value === 0 ? nOfCells - 1 : value - 1;
-                    else value = value === nOfCells - 1 ? 0 : value + 1;
-                    break;
-                case "s":
-                    if (ACTION === "INCREMENT")   value = value === 0 ? nOfCells - 1 : value - 1;
-                    else   value = value === nOfCells - 1 ? 0 : value + 1;
-                    break;
-                case "e":
-                    if (ACTION === "INCREMENT") value = value === nOfCells - 1 ? 0 : value + 1;
-                    else value = value === 0 ? nOfCells - 1 : value - 1;
-                    break;
-                case "o":
-                    if (ACTION === "INCREMENT") value = value === 0 ? nOfCells - 1 : value - 1;
-                    else value = value === nOfCells - 1 ? 0 : value + 1;
-                    break;
-            }
-            return value
-        }
-
+   
         const updateRoverPosition = (command) => {
+
+            const handleDecreaseValue = ( value ) =>{ return   value === 0 ? nOfCells - 1 : value - 1;}  
+            const handleIncreaseValue = ( value ) =>{ return   value === nOfCells - 1 ? 0 : value + 1;}
+
             switch (orientationList[orientation]) {
-                case "n":
-                    tmpY = command === "forward" ? handleSpherePlanet(tmpY, "INCREMENT") : handleSpherePlanet(tmpY, "DECREMENT")
+                case "N":
+                    tmpY = command === "FORWARD" ? handleDecreaseValue(tmpY) : handleIncreaseValue(tmpY)
                     break;
-                case "s":
-                    tmpY = command === "forward" ? handleSpherePlanet(tmpY, "DECREMENT") : handleSpherePlanet(tmpY, "INCREMENT")
+                case "E":
+                    tmpX = command === "FORWARD" ? handleIncreaseValue(tmpX) : handleDecreaseValue(tmpX)
                     break;
-                case "e":
-                    tmpX = command === "forward" ? handleSpherePlanet(tmpX, "INCREMENT") : handleSpherePlanet(tmpX, "DECREMENT")
+                case "S":
+                    tmpY = command === "FORWARD" ? handleIncreaseValue(tmpY) : handleDecreaseValue(tmpY)
                     break;
-                case "o":
-                    tmpX = command === "forward" ? handleSpherePlanet(tmpX, "INCREMENT") : handleSpherePlanet(tmpX, "DECREMENT")
+                case "O":
+                    tmpX = command === "FORWARD" ?handleDecreaseValue(tmpX) : handleIncreaseValue(tmpX)
                     break;
             }
         }
 
         const updateRoverOrientation = (command) => {
-            orientation = command === "right" ?
+            orientation = command === "RIGHT" ?
                 orientation === orientationList.length - 1 ? 0 : orientation + 1
                 :
                 orientation === 0 ? orientationList.length - 1 : orientation - 1
@@ -80,41 +63,46 @@ export const useRoverConfiguration = (nOfCells, obstacles) => {
             
 
             const shiftRover = (commandList) => {
+                setTimeout(()=>{
                 let pastTrack = [{x,y,z: orientationList[orientation]}];
                 for (const iterator of commandList) {
                     tmpY = y
                     tmpX = x
-                    switch (iterator.toLowerCase()) {
-                        case "f":
-                            updateRoverPosition("forward");
+                    switch (iterator) {
+                        case "F":
+                            updateRoverPosition("FORWARD");
                             break;
-                        case "b":
-                            updateRoverPosition("back");
+                        case "B":
+                            updateRoverPosition("BACK");
                             break;
-                        case "r":
-                            updateRoverOrientation("right")
+                        case "R":
+                            updateRoverOrientation("RIGHT")
                             break;
-                        case "l":
-                            updateRoverOrientation("left")
+                        case "L":
+                            updateRoverOrientation("LEFT")
                             break;
                         default:
                             break;
                     }
-                    if(obstacles.some(element => element?.x === tmpX && element?.y === tmpY)) {console.log('block')
-                     break} 
+                    if(obstacles.some(element => element?.x === tmpX && element?.y === tmpY)) {
+                        console.error(`obstacle reached at X: ${tmpX} Y:${tmpY}`);
+                     break
+                    } 
+
                     else{
                         x = tmpX
                         y = tmpY
                         const isRoverRotate = pastTrack.findIndex(element=>element.x === x && element.y === y)
                         if(isRoverRotate === -1 ) pastTrack.push({ x, y, z: orientationList[orientation]})
                         else pastTrack[isRoverRotate].z = orientationList[orientation]
-                        
+                       
                     }
                 }
-                
+               
                 setData({ x, y, z: orientationList[orientation],pastTrack})
                 publish("currentOrientation",orientationList[orientation])
                 pastTrack = []
+            },500)
             }
 
             return [data, shiftRover]

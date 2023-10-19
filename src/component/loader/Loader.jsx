@@ -20,7 +20,7 @@ const Loader = ({ onFinished }) => {
                 clearInterval(interval);
                 onFinished();
             }
-        }, 500); // ogni 600ms apparirà un nuovo comando
+        }, 500); 
 
         return () => clearInterval(interval);
     }, []);

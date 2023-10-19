@@ -37,9 +37,7 @@ export default function Planet({ nOfCells }) {
     }, [])
 
     useEffect(() => {
-
         const tmpState = []
-
         for (let indexCol = 0; indexCol < nOfCells; indexCol++) {
             tmpState.push([])
 
@@ -49,9 +47,6 @@ export default function Planet({ nOfCells }) {
             }
         }
         setGrid(tmpState)
-
-
-    console.log(roverData)
     }, [roverData])
     
 

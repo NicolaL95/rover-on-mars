@@ -46,8 +46,8 @@ export default function CommandsConsole() {
             <div style={{ display: "flex", width: '100%', paddingBottom: "10px" }}>
                 <div style={{ display: "flex", flexDirection: "column", width: "50%", gap: "35px",justifyContent:"center" }}>
                     <div style={{ display: "flex", justifyContent: "space-around" }}>
-                        <Button click={() => (injectCommandToConsole("f"))} customClass={"button-movment"} label='FORWARD' />
-                        <Button click={() => (injectCommandToConsole("b"))} customClass={"button-movment"} label='BACK' />
+                        <Button click={() => (injectCommandToConsole("F"))} customClass={"button-movment"} label='FORWARD' />
+                        <Button click={() => (injectCommandToConsole("B"))} customClass={"button-movment"} label='BACK' />
                         <Button click={removeLastElementFromCommandQuery} customClass={"button-movment"} label='CANCEL' />
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-around", }}>
@@ -59,20 +59,20 @@ export default function CommandsConsole() {
                     
                     <div style={{ display: "flex", flexDirection: "column", width: "75%", alignItems: "center", gap: "10px" }}>
                         <div>
-                            <Button   customClass={`button-orientation-info ${orientation === "n" ? "button-orientation-info-current" : ""}`} label='NORD' />
+                            <Button   customClass={`button-orientation-info ${orientation === "N" ? "button-orientation-info-current" : ""}`} label='NORD' />
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                            <Button   customClass={`button-orientation-info ${orientation === "o" ? "button-orientation-info-current" : ""}`} label='WEAST' />
-                            <Button  customClass={`button-orientation-info ${orientation === "e" ? "button-orientation-info-current" : ""}`} label='EAST' />
+                            <Button   customClass={`button-orientation-info ${orientation === "O" ? "button-orientation-info-current" : ""}`} label='WEAST' />
+                            <Button  customClass={`button-orientation-info ${orientation === "E" ? "button-orientation-info-current" : ""}`} label='EAST' />
                         </div>
                         <div>
-                            <Button   customClass={`button-orientation-info ${orientation === "s" ? "button-orientation-info-current" : ""}`} label='SUD' />
+                            <Button   customClass={`button-orientation-info ${orientation === "S" ? "button-orientation-info-current" : ""}`} label='SUD' />
                         </div>
 
                     </div>
                     <div style={{ height: "50%", width: "100%", display: "flex", justifyContent: "space-around",paddingTop:"20px" }}>
-                        <Button click={() => (injectCommandToConsole("l"))} customClass={"button-orientation"} label='LEFT' />
-                        <Button click={() => (injectCommandToConsole("r"))} customClass={"button-orientation"} label='RIGHT' />
+                        <Button click={() => (injectCommandToConsole("L"))} customClass={"button-orientation"} label='LEFT' />
+                        <Button click={() => (injectCommandToConsole("R"))} customClass={"button-orientation"} label='RIGHT' />
                     </div>
 
                 </div>
