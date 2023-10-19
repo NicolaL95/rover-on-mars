@@ -1,0 +1,47 @@
+.button-movment{
+  width: 95px;
+  font-size: 1.1rem;
+  color: white;
+  border-radius: 15px;
+    border: 2px solid gray;
+}
+.button-movment:first-child{
+   background-color: green;
+  }
+  .button-movment:nth-child(2){
+    background-color: rgb(28, 28, 101);
+   }
+  
+  .button-movment:last-child{
+    background-color: red;
+   }
+
+.button-query-handle{
+    width: 150px;
+    font-size: 1rem;
+    background-color: rgb(208, 208, 177);
+    border-radius: 15px;
+    border: 2px solid gray;
+    color: white;
+}
+.button-orientation{
+  width: 130px;
+  font-size: 1.1rem;
+  background-color: rgb(208, 208, 177);
+  border-radius: 15px;
+  border: 2px solid gray;
+  color: white;
+}
+
+.button-orientation-info{
+  width: 85px;
+  font-size: .8rem;
+  background-color: rgb(141, 141, 141);
+  border-radius: 15px;
+  border: 2px solid gray;
+  color: white;
+}
+
+.button-orientation-info-current{
+  border: 2px solid red;
+}

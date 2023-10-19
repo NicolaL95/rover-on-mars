@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { publish } from "../utils/event";
 
 export const useRoverConfiguration = (nOfCells, obstacles) => {
 
@@ -75,8 +76,11 @@ export const useRoverConfiguration = (nOfCells, obstacles) => {
 
         const useRoverApi = () => {
             const [data, setData] = useState({x,y,z:orientationList[orientation]});
+            publish("currentOrientation",orientationList[orientation])
+            
 
             const shiftRover = (commandList) => {
+                let pastTrack = [{x,y,z: orientationList[orientation]}];
                 for (const iterator of commandList) {
                     tmpY = y
                     tmpX = x
@@ -101,9 +105,16 @@ export const useRoverConfiguration = (nOfCells, obstacles) => {
                     else{
                         x = tmpX
                         y = tmpY
+                        const isRoverRotate = pastTrack.findIndex(element=>element.x === x && element.y === y)
+                        if(isRoverRotate === -1 ) pastTrack.push({ x, y, z: orientationList[orientation]})
+                        else pastTrack[isRoverRotate].z = orientationList[orientation]
+                        
                     }
                 }
-                setData({ x, y, z: orientationList[orientation] })
+                
+                setData({ x, y, z: orientationList[orientation],pastTrack})
+                publish("currentOrientation",orientationList[orientation])
+                pastTrack = []
             }
 
             return [data, shiftRover]

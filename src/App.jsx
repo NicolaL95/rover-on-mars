@@ -4,7 +4,7 @@ import Homepage from './views/homepage/Homepage';
 function App() {
   return (
     <div className='app-background'>
-      <main className='container'>
+      <main>
       <Homepage></Homepage>      
       </main>
     </div>
