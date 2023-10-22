@@ -40,7 +40,7 @@ export default function CommandsConsole() {
     }
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", height: "300px", width: "700px", backgroundColor: "#fffff8", marginTop: "20px", borderRadius: "15px", padding: "10px" }}>
+        <div style={{ display: "flex", flexDirection: "column", height: "300px", width: "700px", backgroundColor: "#fffff8", marginTop: "20px",marginBottom:"20px", borderRadius: "15px", padding: "10px" }}>
 
             <div style={{ display: "flex", width: '100%', paddingBottom: "10px" }}>
                 <div style={{ display: "flex", flexDirection: "column", width: "50%", gap: "35px",justifyContent:"center" }}>

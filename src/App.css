@@ -1,6 +1,7 @@
 .app-background{
   background-image: url('./assets/images/bg-space.png');
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 }
 
